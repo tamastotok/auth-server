@@ -11,7 +11,10 @@ const PORT = process.env.PORT || 5000;
 const URI = process.env.URI;
 
 //  Enable CORS & JSON
-app.use(cors());
+const options = {
+  exposedHeaders: 'auth-token',
+};
+app.use(cors(options));
 app.use(express.json());
 
 // Routes

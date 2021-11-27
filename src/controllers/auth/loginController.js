@@ -29,9 +29,12 @@ module.exports = async function login_user(req, res) {
 
   // JWT
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+
+  // Response
   res.header('auth-token', token).send({
     _id: user._id,
-    message: 'User logged in succesfully!',
+    name: user.name,
     status: true,
+    message: 'User logged in succesfully!',
   });
 };

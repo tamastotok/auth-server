@@ -39,7 +39,7 @@ module.exports = async function register_user(req, res) {
 
   try {
     await user.save();
-    res.send({ message: 'User signed up successfully!', status: true });
+    res.send('User signed up successfully! Click here to login...');
   } catch (error) {
     res.status(400).send(error);
   }
