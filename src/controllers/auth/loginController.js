@@ -23,6 +23,8 @@ module.exports = async function login_user(req, res) {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send('Unable to login!');
 
+  user.login = true;
+
   // Check the password is correct
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send('Unable to login!');

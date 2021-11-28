@@ -30,8 +30,6 @@ module.exports = async function edit_user(req, res) {
   const { error } = validateRegistration(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  console.log(typeof req.body.phone);
-
   await User.findByIdAndUpdate(req.header('_id'), update, options);
   res.send('User info updated!');
 };
