@@ -20,7 +20,7 @@ module.exports = async function edit_user(req, res) {
       email: Joi.string().min(6).max(64).email(),
       bio: Joi.string().empty(''),
       //phone: Joi.string().min(6).pattern(new RegExp('^[+] [0-9]$|[0-9]')),
-      phone: Joi.string().min(6).pattern(new RegExp('[0-9]')),
+      phone: Joi.string().min(6).pattern(new RegExp('[0-9]')).empty(''),
     });
 
     return schema.validate(data);
