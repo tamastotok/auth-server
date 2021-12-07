@@ -14,5 +14,5 @@ module.exports = async function delete_user(req, res) {
 
   await User.deleteOne({ _id: req.header('_id') });
 
-  res.send('User removed!');
+  res.status(200).send('User removed!');
 };
