@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  login: {
+  isOnline: {
     type: Boolean,
     default: false,
   },

@@ -1,8 +1,15 @@
 const User = require('../../models/User');
 
 module.exports = async function find_user(req, res) {
-  const user = await User.findById(req.header('_id'));
-  user.login = false;
+  const update = {
+    isOnline: false,
+  };
 
-  res.send(user.login);
+  const options = {
+    new: true,
+  };
+
+  const user = await User.findByIdAndUpdate(req.header('_id'), update, options);
+
+  res.send(user);
 };

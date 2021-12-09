@@ -15,15 +15,25 @@ const validateLogin = (data) => {
 
 // Login user
 module.exports = async function login_user(req, res) {
+  const conditions = {
+    email: req.body.email,
+  };
+
+  const update = {
+    isOnline: true,
+  };
+
+  const options = {
+    new: true,
+  };
+
   // Validate data
   const { error } = validateLogin(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if user is already in the databaase
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOneAndUpdate(conditions, update, options);
   if (!user) return res.status(400).send('Unable to login!');
-
-  user.login = true;
 
   // Check the password is correct
   const validPassword = await bcrypt.compare(req.body.password, user.password);
@@ -33,10 +43,5 @@ module.exports = async function login_user(req, res) {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
   // Response
-  res.header('auth-token', token).send({
-    _id: user._id,
-    name: user.name,
-    status: true,
-    message: 'User logged in succesfully!',
-  });
+  res.header('auth-token', token).send({ _id: user._id, name: user.name });
 };
