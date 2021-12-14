@@ -12,6 +12,8 @@ const URI = process.env.URI;
 
 //  Enable CORS & JSON
 const options = {
+  origin: process.env.ORIGIN,
+  optionsSuccessStatus: 200,
   exposedHeaders: 'auth-token',
 };
 app.use(cors(options));
